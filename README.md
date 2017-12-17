@@ -43,7 +43,7 @@ parser.setColoumnDelimiter(const char)
 
 Тогда колонка в парсере с символом разделителя будет записана:
 
-test1\, test2,test3\, test4
+test1\\, test2,test3\\, test4
 
 ```
 parser.setEscapingSymbol(const char)

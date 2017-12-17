@@ -12,7 +12,7 @@
 #include "csv_parser.h"
 
 int main(int argc, const char * argv[]) {
-  std::istringstream stream("test\ntest\nkirpichik,1,2,ab\nbanyrule,3,4,cd\ndimonchik0036,5,6");
+  std::istringstream stream("test\ntest\nfirst,1,2,ab\nsecond,3,4,cd\nthird,5,6");
   csv::CSVParser<std::string, int, int, std::string> parser(stream, 2);
   for (std::tuple<std::string, int, int, std::string> line : parser) {
     std::cout << line << std::endl;
