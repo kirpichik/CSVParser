@@ -173,7 +173,7 @@ class CSVParser {
     while (std::getline(stream, coloumn, coloumnDelimiter)) {
       position += coloumn.size();
       if (coloumn[coloumn.size() - 1] == escapingSymbol) {
-        result << coloumn.substr(0, coloumn.size() - 2) << coloumnDelimiter;
+        result << coloumn.substr(0, coloumn.size() - 1) << coloumnDelimiter;
         isMultiColoumn = true;
       } else {
         result << coloumn;

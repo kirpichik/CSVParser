@@ -22,41 +22,50 @@ TEST(CSVParser, Right) {
   for (auto item : parser1)
     out << item << std::endl;
   ASSERT_EQ(out.str(), "test\ntest\n");
-  
+
   stream = std::istringstream("123\n123");
   out = std::ostringstream();
   csv::CSVParser<int> parser2(stream, 0);
   for (auto item : parser2)
     out << item << std::endl;
   ASSERT_EQ(out.str(), "123\n123\n");
-  
+
   stream = std::istringstream("test,test\n");
   out = std::ostringstream();
   csv::CSVParser<std::string, std::string> parser3(stream, 0);
   for (auto item : parser3)
     out << item << std::endl;
   ASSERT_EQ(out.str(), "test | test\n");
-  
+
   stream = std::istringstream("test,test\ntest,test");
   out = std::ostringstream();
   csv::CSVParser<std::string, std::string> parser4(stream, 0);
   for (auto item : parser4)
     out << item << std::endl;
   ASSERT_EQ(out.str(), "test | test\ntest | test\n");
-  
+
   stream = std::istringstream("test,123,test\ntest,456,test");
   out = std::ostringstream();
   csv::CSVParser<std::string, int, std::string> parser5(stream, 0);
   for (auto item : parser5)
     out << item << std::endl;
   ASSERT_EQ(out.str(), "test | 123 | test\ntest | 456 | test\n");
-  
+
   stream = std::istringstream("\n\n\n123");
   out = std::ostringstream();
   csv::CSVParser<int> parser6(stream, 3);
   for (auto item : parser6)
     out << item << std::endl;
   ASSERT_EQ(out.str(), "123\n");
+
+  stream = std::istringstream("abc$*cde*test\ntest1*test2");
+  out = std::ostringstream();
+  csv::CSVParser<std::string, std::string> parser7(stream, 0);
+  parser7.setColoumnDelimiter('*');
+  parser7.setEscapingSymbol('$');
+  for (auto item : parser7)
+    out << item << std::endl;
+  ASSERT_EQ(out.str(), "abc*cde | test\ntest1 | test2\n");
 }
 
 TEST(CSVParser, TooFewColoumns) {
